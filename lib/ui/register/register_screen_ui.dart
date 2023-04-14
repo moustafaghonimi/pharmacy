@@ -7,9 +7,9 @@ import 'package:pharmacy/ui/login/login_screen.dart';
 import '../../core/appColor.dart';
 import '../../main.dart';
 import '../../shared/componant/ui_utlis.dart';
-import '../home/homeScreen_Ui.dart';
-import '../widgets/button_widget.dart';
-import '../widgets/textForFiled_widget.dart';
+import '../bottomNavigation_view.dart';
+import '../widgets/custemButton.dart';
+import '../widgets/custemTextFormFiled.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = 'routename';
@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   key: formKey,
                   child: Column(
                     children: [
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'Pharmacy Title',
                         'Pharmacy Name',
                         icons: IconButton(
@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'Pharmacy ID',
                         'Pharmacy ID',
                         icons: IconButton(
@@ -88,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'City ',
                         'City',
                         icons: IconButton(
@@ -102,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'Village ',
                         'Village',
                         icons: IconButton(
@@ -116,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'PHONE ',
                         'Phone',
                         icons: IconButton(
@@ -131,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'Enter your Email',
                         'Email',
                         icons: IconButton(
@@ -153,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           return null;
                         },
                       ),
-                      TextFormFiled_widget(
+                      CustemTextFormFiled(
                         'Enter your Password',
                         'Password',
                         icons: IconButton(
@@ -180,13 +180,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       Container(
                         width: w * 0.9,
-                        child: ButtonWidget(
-                          () {
+                        child: CustemButton(
+                          callBack: () {
                             print(email_Controller);
                             print(password_Controller);
                             return login_validation();
                           },
-                          'Sign Up',
+                          text: 'Sign Up',
                           buttonColor: AppColor.PrimaryColor,
                           buttonRedias: 10,
                           textColor: AppColor.BlackColor,
@@ -236,7 +236,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       }
       sharedPref!.setString("token", response.token??"token null");
 
-      Get.off(()=>HomeScreen_UI());
+      Get.off(()=>MainPage_bottomNavigation());
       // showMasage(context, response.token ?? 'token null', 'ok', () {
       //   Get.back();
       // });
