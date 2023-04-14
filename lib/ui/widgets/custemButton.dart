@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy/core/appColor.dart';
 
-class ButtonWidget extends StatelessWidget {
+class CustemButton extends StatelessWidget {
   String text;
-  VoidCallback callBack;
+  VoidCallback? callBack;
   Color textColor;
   Color buttonColor;
   double buttonRedias;
 
-  ButtonWidget(this.callBack, this.text,
-      {this.textColor = Colors.black,
+  CustemButton({this.callBack, this.text='',
+      this.textColor = Colors.black,
       this.buttonColor = Colors.black,
       this.buttonRedias = 5});
 

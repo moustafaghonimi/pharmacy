@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
 typedef Validator = String? Function(String?);
-class TextFormFiled_widget extends StatelessWidget {
+typedef OnSaved = String? Function(String?);
+class CustemTextFormFiled extends StatelessWidget {
   String hint;
   String label;
   IconButton? icons;
   TextEditingController? controllers;
   Validator? validate;
+  OnSaved? onSaved;
   bool hideText;
   TextInputType keybordtype;
   VoidCallback? ontap;
 
 
 
-  TextFormFiled_widget(this.hint, this.label,
+  CustemTextFormFiled(this.hint, this.label,
       {this.icons ,
       this.validate,
+      this.onSaved,
       this.controllers,
       this.hideText = false,
       this.keybordtype = TextInputType.text,this.ontap});
@@ -25,7 +28,7 @@ class TextFormFiled_widget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: TextFormField(
-
+onSaved: onSaved,
         textInputAction: TextInputAction.next,
         controller: controllers,
         validator: validate,
