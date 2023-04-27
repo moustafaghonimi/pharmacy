@@ -223,7 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (formKey.currentState?.validate() == false) {
       return;
     }
-    showloding('Looding...', context);
+    showloding('Loading...', context);
     try {
       var response = await API_Manger.register(PharmacyName_Controller.text,
           email_Controller.text, password_Controller.text);
@@ -236,7 +236,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       }
       sharedPref!.setString("token", response.token??"token null");
 
-      Get.off(()=>MainPage_bottomNavigation());
+      Get.offAll(()=>MainPage_bottomNavigation());
       // showMasage(context, response.token ?? 'token null', 'ok', () {
       //   Get.back();
       // });
