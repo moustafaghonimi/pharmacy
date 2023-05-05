@@ -306,7 +306,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       hideMassage(context);
 
 
-      if (response?.message != null||response?.message!='User added successfully') {
+      if (response?.message != null&&response?.message=='User added successfully') {
         showMasage(
             context, "${response?.message}\n${response?.Error}" , 'OK',
                 () {
