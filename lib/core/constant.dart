@@ -1,5 +1,8 @@
 class ApiConstanc{
-  static const String BASE_URL='pharmacy-api-1812.onrender.com';
-  static const String Register_URL='/api/v1/auth/register';
-  static const String Login_URL='/api/v1/auth/login';
+  static const String BASE_URL='druggerappdeployment-106koerzx-abanoubmamdouhhanna.vercel.app';
+  static const String Register_URL='/auth/register';
+  static const String Login_URL='/auth/login';
+  static const String ResetPasswordOTP='/auth/resetPasswordOTP';
+  static const String ForgetPasswordOTP='auth/forgetPasswordOTP';
+
 }

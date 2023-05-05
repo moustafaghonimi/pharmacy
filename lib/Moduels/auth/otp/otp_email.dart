@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:pharmacy/Moduels/otp/reset_Password.dart';
-import 'package:pharmacy/core/appColor.dart';
+import 'package:pharmacy/Moduels/auth/otp/reset_Password.dart';
 
-import '../../repositorie/data_source/remote.dart';
-import '../../shared/network/remote/api_manger.dart';
-import '../../get_controler/authViewModel_Controller .dart';
-import '../widgets/custemButton.dart';
-import '../widgets/custemText.dart';
-import '../widgets/custemTextFormFiled.dart';
+import '../../../core/appColor.dart';
+import '../../../get_controler/authViewModel_Controller .dart';
+import '../../../repositorie/data_source/remote.dart';
+import '../../../shared/network/remote/api_manger.dart';
+import '../../widgets/custemButton.dart';
+import '../../widgets/custemText.dart';
+import '../../widgets/custemTextFormFiled.dart';
+
 
 class Otp_BY_Email extends StatelessWidget {
   static const routeName = 'otp';
@@ -128,23 +129,10 @@ class Otp_BY_Email extends StatelessWidget {
       if (response?.message == null ||
           response?.message != 'OTP code have been sent to your account') {
         Get.snackbar('Email  Is Incorrect', response!.message.toString());
-        // showMasage(
-        //     context,
-        //     "${response.message}\n${response.Error}" ,
-        //     'OK', () {
-        //   Get.back();
-        // });
+
         return;
       }
-      //   final authorization = response.authorization;
-      //
-      //   if (authorization != null) {
-      //     Get.snackbar("Token", authorization.token??"dont");
-      //   }
-      //   sharedPref!.setString("token", authorization?.token ?? "token null");
-      //   print(sharedPref);
-      //   Get.off(() => MainPage_bottomNavigation());
-      //   Get.snackbar("Token", authorization?.token??"dont");
+
     } catch (e) {
       // hideMassage(context);
       print(e);

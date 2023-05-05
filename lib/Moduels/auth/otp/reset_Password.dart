@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pharmacy/core/appColor.dart';
 
-import '../../repositorie/data_source/remote.dart';
-import '../../shared/network/remote/api_manger.dart';
-import '../../get_controler/authViewModel_Controller .dart';
-import '../../shared/componant/ui_utlis.dart';
+import '../../../get_controler/authViewModel_Controller .dart';
+import '../../../repositorie/data_source/remote.dart';
+import '../../../shared/network/remote/api_manger.dart';
+import '../../widgets/custemButton.dart';
+import '../../widgets/custemText.dart';
+import '../../widgets/custemTextFormFiled.dart';
 import '../login/login_screen.dart';
-import '../widgets/custemButton.dart';
-import '../widgets/custemText.dart';
-import '../widgets/custemTextFormFiled.dart';
+
+
 
 class ResetPassword extends StatefulWidget {
   static const routeName = 'reset';

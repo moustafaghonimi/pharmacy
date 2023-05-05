@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../core/appColor.dart';
 import '../home/homescreen.dart';
 import '../widgets/custemAnimetedTxt.dart';

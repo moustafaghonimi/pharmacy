@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class AuthViewModel  extends GetxController{
 
-
+String? email;
   @override
   void onInit() {
     // TODO: implement onInit
