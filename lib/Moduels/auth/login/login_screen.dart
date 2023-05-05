@@ -10,6 +10,7 @@ import '../../bottomNavigation_view.dart';
 import '../../widgets/custemButton.dart';
 import '../../widgets/custemText.dart';
 import '../../widgets/custemTextFormFiled.dart';
+import '../otp/otp_email.dart';
 import '../register/register_screen_ui.dart';
 
 
@@ -156,7 +157,9 @@ class _LoginScreen_UIState extends State<LoginScreen_UI> {
                                       left: 180.0, bottom: 10),
                                   child: InkWell(
                                     hoverColor: AppColor.PrimaryColor,
-                                    onTap: () {},
+                                    onTap: () {
+                                     Get.to( Otp_BY_Email());
+                                    },
                                     child: Text('Forgot Password?',
                                         style: TextStyle(color: Colors.black)),
                                   )),
