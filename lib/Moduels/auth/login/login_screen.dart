@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy/api/api_manger.dart';
 import 'package:pharmacy/main.dart';
 import 'package:pharmacy/shared/componant/ui_utlis.dart';
-import 'package:pharmacy/ui/register/register_screen_ui.dart';
 
-import '../../core/appColor.dart';
-import '../bottomNavigation_view.dart';
-import '../widgets/custemButton.dart';
-import '../widgets/custemText.dart';
-import '../widgets/custemTextFormFiled.dart';
+import '../../../core/appColor.dart';
+import '../../../repositorie/data_source/remote.dart';
+import '../../../shared/network/remote/api_manger.dart';
+import '../../bottomNavigation_view.dart';
+import '../../widgets/custemButton.dart';
+import '../../widgets/custemText.dart';
+import '../../widgets/custemTextFormFiled.dart';
+import '../register/register_screen_ui.dart';
+
+
 
 class LoginScreen_UI extends StatefulWidget {
   static const String routeName = 'LoginScreen';
@@ -20,8 +23,10 @@ class LoginScreen_UI extends StatefulWidget {
 
 class _LoginScreen_UIState extends State<LoginScreen_UI> {
   var formKey = GlobalKey<FormState>();
+  var repo=Repo(baseRepositorie: Remote());
   var emailControler = TextEditingController();
   var passwordControler = TextEditingController();
+  var PharmacyID_Controller = TextEditingController();
   bool passwordVisible = true;
 
   @override
@@ -85,6 +90,21 @@ class _LoginScreen_UIState extends State<LoginScreen_UI> {
                           child: Column(
                             children: [
                               CustemTextFormFiled(
+                                'Pharmacy ID',
+                                'Pharmacy ID',
+                                icons: IconButton(
+                                  icon: Icon(Icons.confirmation_num_outlined),
+                                  onPressed: () {},
+                                ),
+                                controllers: PharmacyID_Controller,
+                                validate: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Pharmacy ID is required';
+                                  }
+                                },
+                              ),
+
+                              CustemTextFormFiled(
                                 'Enter your Email',
                                 'Email',
                                 icons: IconButton(
@@ -144,7 +164,6 @@ class _LoginScreen_UIState extends State<LoginScreen_UI> {
                                 width: w * 0.9,
                                 child: CustemButton(
                                  callBack: () {
-                                    print(passwordControler);
 
                                     return login_validation();
                                   },
@@ -211,35 +230,43 @@ class _LoginScreen_UIState extends State<LoginScreen_UI> {
     );
   }
 
+
   void login_validation() async {
     if (formKey.currentState?.validate() == false) {
       return;
     }
     showloding('Loading...', context);
     try {
-      var response =
-          await API_Manger.login(emailControler.text, passwordControler.text);
+      var response = await repo.baseRepositorie?.login(
+          PharmacyID_Controller.text,
+        emailControler.text,
+        passwordControler.text
+      );
       hideMassage(context);
-      if (response.token == null) {
+
+      var authorization=response?.authorization;
+
+      if (response?.message != null && response?.message!='Logged in successfully') {
         showMasage(
-            context, response.msg ?? "Email OR Password not correct !", 'OK',
-            () {
-          Get.back();
-        });
-        return;
+            context, response?.message ?? "Email OR Password not correct !", 'OK',
+                () {
+              Get.back();
+            });
+        Get.snackbar('message', response!.message.toString());
+return;
       }
-      sharedPref!.setString("token", response.token ?? "token null");
+      if (authorization?.token != null ) {
+        Get.snackbar('token', authorization?.token??"");
+      }
+      sharedPref!.setString("token", authorization?.token ?? "token null");
       print(sharedPref);
       // showMasage(context, response.token??'', 'ok', () {Get.back(); });
       Get.off(() => MainPage_bottomNavigation());
-    } catch (e) {
-      hideMassage(context);
-      print(e);
 
-      showMasage(context, 'Check Internet and Try Again ------> ${e}', 'OK',
-          () {
-        Get.back();
-      });
+    } catch (e) {
+      // hideMassage(context);
+      print(e);
+      Get.snackbar('error', e.toString());
     }
   }
 }

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/core/appColor.dart';
 import 'package:pharmacy/main.dart';
-import 'package:pharmacy/ui/login/login_screen.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../get_controler/bottom_navigation_controler.dart';
 import 'add_Drug/addDrug_View.dart';
+
 
 class MainPage_bottomNavigation extends StatelessWidget {
   static const String routeName = 'bottombar';

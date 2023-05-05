@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:pharmacy/ui/home/homescreen.dart';
+import 'package:pharmacy/Moduels/home/homescreen.dart';
 
 import '../get_controler/drawerr_contoler.dart';
 

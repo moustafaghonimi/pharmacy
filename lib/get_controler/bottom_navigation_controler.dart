@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../ui/home/homescreen.dart';
-import '../ui/massaging/massaging_view.dart';
-import '../ui/my_order/myOrder_ui.dart';
-import '../ui/profile/profile_view.dart';
+import '../Moduels/home/homescreen.dart';
+import '../Moduels/massaging/massaging_view.dart';
+import '../Moduels/my_order/myOrder_ui.dart';
+import '../Moduels/profile/profile_view.dart';
 
 class HomeViewModel extends GetxController {
   var _tabIndex = 0;

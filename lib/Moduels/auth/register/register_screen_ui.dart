@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:pharmacy/api/api_manger.dart';
-import 'package:pharmacy/ui/login/login_screen.dart';
 
-import '../../core/appColor.dart';
-import '../../main.dart';
-import '../../shared/componant/ui_utlis.dart';
-import '../bottomNavigation_view.dart';
-import '../widgets/custemButton.dart';
-import '../widgets/custemTextFormFiled.dart';
+import '../../../core/appColor.dart';
+import '../../../repositorie/data_source/remote.dart';
+import '../../../shared/componant/ui_utlis.dart';
+import '../../../shared/network/remote/api_manger.dart';
+import '../../bottomNavigation_view.dart';
+import '../../widgets/custemButton.dart';
+import '../../widgets/custemText.dart';
+import '../../widgets/custemTextFormFiled.dart';
+import '../login/login_screen.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = 'routename';
@@ -19,20 +21,28 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  var repo=Repo(baseRepositorie: Remote());
   var formKey = GlobalKey<FormState>();
-  var email_Controller = TextEditingController();
-  var password_Controller = TextEditingController();
-  var PharmacyName_Controller = TextEditingController();
   var PharmacyID_Controller = TextEditingController();
-  var city_controller = TextEditingController();
-  var village_controller = TextEditingController();
+  var Pharmacyname_Controller = TextEditingController();
+  var userNameControler = TextEditingController();
+  var firestNameControler = TextEditingController();
+  var lastNameControler = TextEditingController();
+  var emailControler = TextEditingController();
+  var passwordControler = TextEditingController();
+  var cpasswordControler = TextEditingController();
+  var ageControler = TextEditingController();
   var phone_controller = TextEditingController();
   bool passwordVisible = true;
+  bool cpasswordVisible = true;
+
+
 
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+  var repo=Repo(baseRepositorie: Remote());
 
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           icon: Icon(Icons.title),
                           onPressed: () {},
                         ),
-                        controllers: PharmacyName_Controller,
+                        controllers: Pharmacyname_Controller,
                         validate: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Pharmacy Name is required';
@@ -89,30 +99,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       CustemTextFormFiled(
-                        'City ',
-                        'City',
+                        'User Name ',
+                        'User Name ',
                         icons: IconButton(
-                          icon: Icon(Icons.location_city),
+                          icon: Icon(Icons.person),
                           onPressed: () {},
                         ),
-                        controllers: city_controller,
+                        controllers: userNameControler,
                         validate: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'City name Required';
+                            return 'user name Required';
                           }
                         },
                       ),
                       CustemTextFormFiled(
-                        'Village ',
-                        'Village',
+                        'First Name',
+                        'First Name',
                         icons: IconButton(
-                          icon: Icon(Icons.holiday_village),
+                          icon: Icon(Icons.looks_one),
                           onPressed: () {},
                         ),
-                        controllers: village_controller,
+                        controllers: firestNameControler,
                         validate: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'Village name Required';
+                            return 'First name Required';
+                          }
+                        },
+                      ),
+                      CustemTextFormFiled(
+                        'Last Name',
+                        'Last Name',
+                        icons: IconButton(
+                          icon: Icon(Icons.looks_two),
+                          onPressed: () {},
+                        ),
+                        controllers: lastNameControler,
+                        validate: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Last name Required';
                           }
                         },
                       ),
@@ -132,13 +156,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       CustemTextFormFiled(
+                        'Age ',
+                        'Age',
+                        icons: IconButton(
+                          icon: Icon(Icons.numbers),
+                          onPressed: () {},
+                        ),
+                        keybordtype: TextInputType.number,
+                        controllers: ageControler,
+                        validate: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Your Age Required';
+                          }
+                        },
+                      ),
+                      CustemTextFormFiled(
                         'Enter your Email',
                         'Email',
                         icons: IconButton(
                           icon: Icon(Icons.email),
                           onPressed: () {},
                         ),
-                        controllers: email_Controller,
+                        controllers: emailControler,
                         keybordtype: TextInputType.emailAddress,
                         validate: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -170,7 +209,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             });
                           },
                         ),
-                        controllers: password_Controller,
+                        controllers: passwordControler,
                         hideText: passwordVisible ? true : false,
                         validate: (value) {
                           if (value == null || value.trim().isEmpty) {
@@ -178,13 +217,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                         },
                       ),
+                      CustemTextFormFiled(
+                        'Enter Re Password',
+                        'Re Password',
+                        icons: IconButton(
+                          icon: Icon(
+                            // Based on passwordVisible state choose the icon
+                            cpasswordVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            // Update the state i.e. toogle the state of passwordVisible variable
+                            setState(() {
+                              cpasswordVisible = !cpasswordVisible;
+                            });
+                          },
+                        ),
+                        controllers: cpasswordControler,
+                        hideText: cpasswordVisible ? true : false,
+                        validate: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            if(passwordVisible!=cpasswordVisible){
+                              return 'two password not same ';
+                            }
+                            return 'Re Password not validate';
+                          }
+                        },
+                      ),
                       Container(
                         width: w * 0.9,
                         child: CustemButton(
                           callBack: () {
-                            print(email_Controller);
-                            print(password_Controller);
-                            return login_validation();
+
+                            return register_validation();
                           },
                           text: 'Sign Up',
                           buttonColor: AppColor.PrimaryColor,
@@ -219,35 +285,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void login_validation() async {
+  void register_validation() async {
     if (formKey.currentState?.validate() == false) {
       return;
     }
     showloding('Loading...', context);
     try {
-      var response = await API_Manger.register(PharmacyName_Controller.text,
-          email_Controller.text, password_Controller.text);
+      var response = await repo.baseRepositorie?.register(
+          PharmacyID_Controller.text,
+          Pharmacyname_Controller.text,
+          userNameControler.text,
+          firestNameControler.text,
+          lastNameControler.text,
+          emailControler.text,
+        passwordControler.text,
+        cpasswordControler.text,
+        ageControler.text,
+          phone_controller.text
+      );
       hideMassage(context);
-      if (response.token == null) {
-        showMasage(context, response.msg ?? 'Email is used', 'ok', () {
-          Get.back();
-        });
+
+
+      if (response?.message != null||response?.message!='User added successfully') {
+        showMasage(
+            context, "${response?.message}\n${response?.Error}" , 'OK',
+                () {
+              Get.back();
+            });
+        Get.snackbar('message', response!.Error.toString());
         return;
       }
-      sharedPref!.setString("token", response.token??"token null");
+      if (response?.user != null ) {
+        Get.snackbar('token', response?.user??"");
+      }
+      // sharedPref!.setString("token", authorization?.token ?? "token null");
+      // print(sharedPref);
+      // showMasage(context, response.token??'', 'ok', () {Get.back(); });
+      Get.off(() => LoginScreen_UI());
 
-      Get.offAll(()=>MainPage_bottomNavigation());
-      // showMasage(context, response.token ?? 'token null', 'ok', () {
-      //   Get.back();
-      // });
-      print(response.token);
     } catch (e) {
-      hideMassage(context);
+      // hideMassage(context);
       print(e);
-      showMasage(context, 'Check Internet and Try Again ------> ${e}', 'OK',
-          () {
-        Get.back();
-      });
+      Get.snackbar('error', e.toString());
     }
   }
+
 }

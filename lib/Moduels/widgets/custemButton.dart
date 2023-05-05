@@ -7,11 +7,15 @@ class CustemButton extends StatelessWidget {
   Color textColor;
   Color buttonColor;
   double buttonRedias;
+  double fontsize;
 
-  CustemButton({this.callBack, this.text='',
+  CustemButton(
+      {this.callBack,
+      this.text = '',
       this.textColor = Colors.black,
       this.buttonColor = Colors.black,
-      this.buttonRedias = 5});
+      this.buttonRedias = 5,
+      this.fontsize = 20});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class CustemButton extends StatelessWidget {
         text,
         style: TextStyle(
           color: textColor,
-          fontSize: 20,
+          fontSize: fontsize,
           fontWeight: FontWeight.w600,
         ),
       ),
